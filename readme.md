@@ -1,27 +1,26 @@
 # Beauty CMS
 
-System Zarządzania Treścią (CMS) dla salonu piękności, umożliwiający zarządzanie klientami i wizytami. Projekt jest w fazie rozwoju.
+A simple Content Management System (CMS) designed for beauty salons to manage clients and appointments. The project is currently under development.
 
-## Główne Funkcjonalności
+## Key Features
 
-- **Dashboard:** Szybki podgląd na najważniejsze statystyki, w tym całkowitą liczbę klientów i listę ostatnio dodanych.
-- **Moduł Klientów:** Pełna obsługa CRUD (Create, Read, Update, Delete) dla klientów. Możliwość dodawania, edytowania, usuwania i przeglądania szczegółów każdego klienta wraz z notatkami.
-- **Wyszukiwanie:** Szybkie wyszukiwanie klientów po imieniu, nazwisku lub numerze telefonu.
-- **Prosty interfejs:** Czysty i intuicyjny design oparty na czystym HTML, CSS i JavaScript.
+- **Dashboard:** A quick overview of key metrics, including the total number of clients and a list of recently added clients.
+- **Client Management:** Full **CRUD** (Create, Read, Update, Delete) support for client records. This includes adding, editing, deleting, and viewing detailed client information and notes.
+- **Intuitive Interface:** A clean and user-friendly design built with plain HTML, CSS, and JavaScript.
 
-## Technologia
+## Technologies
 
-- **Backend:** PHP (z użyciem wzorca Singleton do połączenia z bazą danych)
-- **Frontend:** HTML, CSS, JavaScript (Vanilla JS)
-- **Baza danych:** MySQL
+- **Backend:** PHP (utilizing the Singleton design pattern for database connection)
+- **Frontend:** **HTML**, **CSS**, and **Vanilla JavaScript**.
+- **Database: MySQL**
 
-## Jak uruchomić projekt
+## Getting Started
 
-1.  Upewnij się, że masz zainstalowany serwer lokalny (np. XAMPP, WAMP).
-2.  Skopiuj pliki projektu do katalogu serwera (np. `C:/xampp/htdocs/beauty-cms`).
-3.  Utwórz bazę danych o nazwie `beauty_cms` w phpMyAdmin.
-4.  W pliku `config/database.php` zaktualizuj dane logowania do bazy danych.
-5.  Zaimportuj strukturę tabel. Przykład:
+1.  Make sure you have a local server environment (like **XAMPP** or **WAMP**) installed and running.
+2.  Copy the project files to your server's root directory (e.g., `C:/xampp/htdocs/beauty-cms`).
+3.  Create a new database named `beauty_cms` in phpMyAdmin.
+4.  Update the database connection credentials in `config/database.php`.
+5.  Import the required table structure into your new database. Use the following SQL example:
     ```sql
     CREATE TABLE clients (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -34,4 +33,4 @@ System Zarządzania Treścią (CMS) dla salonu piękności, umożliwiający zarz
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
     ```
-6.  Przejdź do `http://localhost/beauty-cms/` w swojej przeglądarce.
+6.  Open your web browser and navigate to `http://localhost/beauty-cms/` to access the application.
