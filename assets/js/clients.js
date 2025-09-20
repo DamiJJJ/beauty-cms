@@ -1,19 +1,10 @@
-// assets/js/clients.js
-
-/**
- * Beauty CMS - Clients Module JavaScript
- * Pełna obsługa funkcjonalności związanych z klientami
- */
-
 const ClientsModule = {
-  // Stan modułu
   state: {
     clients: [],
     searchTerm: "",
     currentClientId: null,
   },
 
-  // Inicjalizacja modułu klientów
   init() {
     console.log("Clients Module - Inicjalizacja...");
     this.bindEvents();
@@ -21,15 +12,12 @@ const ClientsModule = {
     this.initSearch();
   },
 
-  // Bindowanie event listenerów
   bindEvents() {
-    // Formularz klienta
     const clientForm = document.getElementById("clientForm");
     if (clientForm) {
       clientForm.addEventListener("submit", this.handleSubmitClient.bind(this));
     }
 
-    // Przycisk dodawania klienta
     const addClientBtn = document.getElementById("addClientBtn");
     if (addClientBtn) {
       addClientBtn.addEventListener("click", () => {
@@ -42,18 +30,12 @@ const ClientsModule = {
       });
     }
 
-    // Przycisk usuwania w modalu potwierdzenia
     const deleteConfirmBtn = document.getElementById("deleteConfirmBtn");
     if (deleteConfirmBtn) {
       deleteConfirmBtn.addEventListener("click", this.deleteClient.bind(this));
     }
   },
 
-  // ===== ŁADOWANIE DANYCH =====
-
-  /**
-   * Ładuje listę wszystkich klientów
-   */
   async loadClients() {
     try {
       const container = document.getElementById("clientsList");
@@ -77,11 +59,6 @@ const ClientsModule = {
     }
   },
 
-  // ===== RENDEROWANIE =====
-
-  /**
-   * Renderuje listę klientów
-   */
   renderClients() {
     const container = document.getElementById("clientsList");
     if (!container) return;
@@ -100,9 +77,6 @@ const ClientsModule = {
     container.innerHTML = html;
   },
 
-  /**
-   * Renderuje kartę pojedynczego klienta
-   */
   renderClientCard(client) {
     const initials = BeautyApp.getInitials(client.first_name, client.last_name);
     const fullName = `${BeautyApp.escapeHtml(client.first_name)} ${BeautyApp.escapeHtml(client.last_name)}`;
@@ -110,7 +84,6 @@ const ClientsModule = {
     const appointmentsText = client.appointments_count == 1 ? "wizyta" : "wizyt";
     const createdDate = BeautyApp.formatDate(client.created_at);
 
-    // Dodaj warunek, który wyświetla notatki tylko, jeśli istnieją
     const notesHtml = client.notes
       ? `<div class="client-notes">
             <strong>Notatki:</strong> 
@@ -153,9 +126,6 @@ const ClientsModule = {
     `;
   },
 
-  /**
-   * Renderuje stan pusty (brak klientów)
-   */
   renderEmptyState() {
     const container = document.getElementById("clientsList");
     if (!container) return;
@@ -174,9 +144,6 @@ const ClientsModule = {
     `;
   },
 
-  /**
-   * Renderuje błąd
-   */
   renderError(message) {
     const container = document.getElementById("clientsList");
     if (!container) return;
@@ -194,11 +161,7 @@ const ClientsModule = {
         </div>
     `;
   },
-  // ===== OPERACJE CRUD =====
 
-  /**
-   * Obsługuje submit formularza klienta (dodawanie/edycja)
-   */
   async handleSubmitClient(event) {
     event.preventDefault();
 
@@ -246,9 +209,6 @@ const ClientsModule = {
     }
   },
 
-  /**
-   * Pobiera dane klienta i otwiera modal edycji
-   */
   async editClient(clientId) {
     try {
       const response = await BeautyApp.makeRequest(`../ajax/clients.php?action=get&id=${clientId}`);
@@ -267,9 +227,6 @@ const ClientsModule = {
     }
   },
 
-  /**
-   * Wypełnia formularz danymi klienta
-   */
   fillClientForm(client) {
     document.getElementById("clientId").value = client.id;
     document.getElementById("firstName").value = client.first_name || "";
@@ -280,20 +237,13 @@ const ClientsModule = {
     document.getElementById("notes").value = client.notes || "";
   },
 
-  /**
-   * Otwiera modal potwierdzenia usunięcia
-   */
   openDeleteModal(clientId, clientName) {
     this.state.currentClientId = clientId;
     document.getElementById("clientToDelete").textContent = clientName;
     BeautyApp.openModal("deleteModal");
   },
 
-  /**
-   * Usuwa klienta po potwierdzeniu
-   */
   async deleteClient() {
-    // Sprawdź, czy stan modułu ma ID klienta do usunięcia
     if (!this.state.currentClientId) return;
 
     try {
@@ -305,7 +255,7 @@ const ClientsModule = {
       if (response.success) {
         BeautyApp.showNotification(response.message, "success");
         BeautyApp.closeModal("deleteModal");
-        this.loadClients(); // Odśwież listę
+        this.loadClients();
       } else {
         BeautyApp.showNotification(response.message, "error");
       }
@@ -317,15 +267,10 @@ const ClientsModule = {
     }
   },
 
-  /**
-   * Zobacz szczegóły klienta (placeholder)
-   */
   viewClient(clientId) {
     window.location.href = `client_detail.php?id=${clientId}`;
   },
 };
-
-// ===== INICJALIZACJA =====
 
 document.addEventListener("DOMContentLoaded", () => {
   if (window.location.pathname.includes("clients.php") || document.getElementById("clientsList")) {
@@ -333,5 +278,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Eksportuj dla dostępu globalnego
 window.ClientsModule = ClientsModule;

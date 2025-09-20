@@ -13,7 +13,6 @@ const BeautyApp = {
     }
   },
 
-  // Funkcja do otwierania modali
   openModal: (modalId) => {
     const modal = document.getElementById(modalId);
     if (modal) {
@@ -21,7 +20,6 @@ const BeautyApp = {
     }
   },
 
-  // Funkcja do zamykania modali
   closeModal: (modalId) => {
     const modal = document.getElementById(modalId);
     if (modal) {
@@ -29,20 +27,16 @@ const BeautyApp = {
     }
   },
 
-  // Funkcja do pokazywania notyfikacji
   showNotification: (message, type = "info", duration = 3000) => {
     console.log(`Powiadomienie (${type}): ${message}`);
-    // W przyszłości tutaj zaimplementujesz notyfikacje
   },
 
-  // Funkcja pomocnicza do tworzenia inicjałów
   getInitials: (firstName, lastName) => {
     const first = firstName ? firstName[0].toUpperCase() : "";
     const last = lastName ? lastName[0].toUpperCase() : "";
     return first + last;
   },
 
-  // Funkcja do formatowania numeru telefonu
   formatPhone: (phone) => {
     if (!phone) return "Brak";
     const cleaned = ("" + phone).replace(/\D/g, "");
@@ -50,7 +44,6 @@ const BeautyApp = {
     return match ? `${match[1]} ${match[2]} ${match[3]}` : phone;
   },
 
-  // Funkcja do formatowania daty
   formatDate: (dateStr) => {
     if (!dateStr) return "";
     const date = new Date(dateStr);
@@ -64,7 +57,6 @@ BeautyApp.escapeHtml = (text) => {
   return div.innerHTML;
 };
 
-// Funkcje globalne do użycia w HTML
 function openModal(modalId) {
   BeautyApp.openModal(modalId);
 }

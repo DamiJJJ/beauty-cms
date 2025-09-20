@@ -1,6 +1,4 @@
 <?php
-// ajax/clients.php
-
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../classes/Client.php';
 
@@ -34,9 +32,6 @@ try {
     sendResponse(false, 'Błąd serwera: ' . $e->getMessage());
 }
 
-/**
- * Wysłanie odpowiedzi JSON
- */
 function sendResponse($success, $message, $data = null) {
     $response = [
         'success' => $success,
@@ -49,9 +44,6 @@ function sendResponse($success, $message, $data = null) {
     exit;
 }
 
-/**
- * Obsługa żądań GET
- */
 function handleGetRequest($clientObj) {
     $action = $_GET['action'] ?? '';
     if ($action === 'list') {
@@ -72,9 +64,6 @@ function handleGetRequest($clientObj) {
     }
 }
 
-/**
- * Obsługa żądań POST - dodawanie nowego klienta
- */
 function handlePostRequest($clientObj) {
     $data = json_decode(file_get_contents('php://input'), true);
 
@@ -98,9 +87,6 @@ function handlePostRequest($clientObj) {
     }
 }
 
-/**
- * Obsługa żądań PUT - aktualizacja klienta
- */
 function handlePutRequest($clientObj) {
     $data = json_decode(file_get_contents('php://input'), true);
     if (!isset($data['client_id'])) {
@@ -122,9 +108,6 @@ function handlePutRequest($clientObj) {
     }
 }
 
-/**
- * Obsługa żądań DELETE - usuwanie klienta
- */
 function handleDeleteRequest($clientObj) {
     $data = json_decode(file_get_contents('php://input'), true);
     if (!isset($data['client_id'])) {

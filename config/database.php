@@ -5,8 +5,8 @@ class Database {
 
     private $host = 'localhost';
     private $dbname = 'beauty_cms';
-    private $user = 'root'; // Zmień na swoje dane
-    private $password = ''; // Zmień na swoje dane
+    private $user = 'root';
+    private $password = '';
 
     private function __construct() {
         $dsn = "mysql:host={$this->host};dbname={$this->dbname};charset=utf8mb4";
